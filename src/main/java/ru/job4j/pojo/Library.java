@@ -14,6 +14,9 @@ public class Library {
         books[3] = books[0];
         books[0] = temp;
         for (int i = 0; i < books.length; i++) {
+            System.out.println(books[i].getTitle() + " - " + books[i].getPages());
+        }
+        for (int i = 0; i < books.length; i++) {
             if (books[i].getTitle().equals("Clean code")) {
                 System.out.println(books[i].getTitle() + " - " + books[i].getPages());
             }
