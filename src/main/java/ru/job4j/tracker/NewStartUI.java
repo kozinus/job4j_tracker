@@ -29,6 +29,18 @@ public class NewStartUI {
                         System.out.println("Хранилище не содержит заявок");
                     }
                 }
+                case 2 -> {
+                    System.out.println("=== Show all items ===");
+                    System.out.print("Enter id: ");
+                    int id = Integer.parseInt(scanner.nextLine());
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    if (tracker.replace(id, new Item(name))) {
+                        System.out.println("Заявка успешно изменена");
+                    } else {
+                        System.out.println("Ошибка замены заявки");
+                    }
+                }
                 case 6 -> {
                     run = false;
                 }
