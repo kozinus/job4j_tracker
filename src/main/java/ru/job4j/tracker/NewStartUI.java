@@ -3,17 +3,28 @@ package ru.job4j.tracker;
 import java.util.Scanner;
 
 public class NewStartUI {
-
+    @SuppressWarnings("checkstyle:InnerAssignment")
     public void init(Scanner scanner, Tracker tracker) {
         boolean run = true;
         while (run) {
             showMenu();
             System.out.print("Select: ");
             int select = Integer.parseInt(scanner.nextLine());
-            if (select != 6) {
-                System.out.println("пользователь выбрал: " + select);
-            } else {
-                run = false;
+            switch (select) {
+                case 0 -> {
+                    System.out.println("=== Create a new Item ===");
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    Item item = new Item(name);
+                    tracker.add(item);
+                    System.out.println("Добавленная заявка: " + item);
+                }
+                case 6 -> {
+                    run = false;
+                }
+                default -> {
+                    System.out.println("Выберите команду в меню");
+                }
             }
         }
     }
