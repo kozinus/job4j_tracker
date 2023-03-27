@@ -62,6 +62,19 @@ public class NewStartUI {
                         System.out.println("Заявка с введенным id: " + id + " не найдена.");
                     }
                 }
+                case 5 -> {
+                    System.out.println("=== Find item by name ===");
+                    System.out.print("Enter name: ");
+                    String name = scanner.nextLine();
+                    Item[] items = tracker.findByName(name);
+                    if (items.length > 0) {
+                        for (Item item : items) {
+                            System.out.println(item);
+                        }
+                    } else {
+                        System.out.println("Заявки с именем: " + name + " не найдены");
+                    }
+                }
                 case 6 -> {
                     run = false;
                 }
