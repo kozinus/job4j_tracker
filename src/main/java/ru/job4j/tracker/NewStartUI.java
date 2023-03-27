@@ -41,6 +41,16 @@ public class NewStartUI {
                         System.out.println("Ошибка замены заявки");
                     }
                 }
+                case 3 -> {
+                    System.out.println("=== Delete item ===");
+                    System.out.print("Enter id: ");
+                    int id = Integer.parseInt(scanner.nextLine());
+                    if (tracker.delete(id)) {
+                        System.out.println("Заявка успешно удалена");
+                    } else {
+                        System.out.println("Ошибка удаления заявки");
+                    }
+                }
                 case 6 -> {
                     run = false;
                 }
