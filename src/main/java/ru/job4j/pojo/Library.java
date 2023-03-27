@@ -17,7 +17,7 @@ public class Library {
             System.out.println(books[i].getTitle() + " - " + books[i].getPages());
         }
         for (int i = 0; i < books.length; i++) {
-            if (books[i].getTitle().equals("Clean code")) {
+            if ("Clean code".equals(books[i].getTitle())) {
                 System.out.println(books[i].getTitle() + " - " + books[i].getPages());
             }
         }
