@@ -3,7 +3,6 @@ package ru.job4j.tracker;
 import java.util.Scanner;
 
 public class NewStartUI {
-    @SuppressWarnings("checkstyle:InnerAssignment")
     public void init(Scanner scanner, Tracker tracker) {
         boolean run = true;
         while (run) {
@@ -18,6 +17,17 @@ public class NewStartUI {
                     Item item = new Item(name);
                     tracker.add(item);
                     System.out.println("Добавленная заявка: " + item);
+                }
+                case 1 -> {
+                    System.out.println("=== Show all items ===");
+                    Item[] items = tracker.findAll();
+                    if (items.length > 0) {
+                        for (Item item : items) {
+                            System.out.println(item);
+                        }
+                    } else {
+                        System.out.println("Хранилище не содержит заявок");
+                    }
                 }
                 case 6 -> {
                     run = false;
