@@ -30,7 +30,7 @@ public class NewStartUI {
                     }
                 }
                 case 2 -> {
-                    System.out.println("=== Show all items ===");
+                    System.out.println("=== Edit item ===");
                     System.out.print("Enter id: ");
                     int id = Integer.parseInt(scanner.nextLine());
                     System.out.print("Enter name: ");
