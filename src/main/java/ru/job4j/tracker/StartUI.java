@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.Scanner;
 
-public class NewStartUI {
+public class StartUI {
     public void init(Scanner scanner, Tracker tracker) {
         boolean run = true;
         while (run) {
@@ -100,6 +100,6 @@ public class NewStartUI {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Tracker tracker = new Tracker();
-        new NewStartUI().init(scanner, tracker);
+        new StartUI().init(scanner, tracker);
     }
 }
