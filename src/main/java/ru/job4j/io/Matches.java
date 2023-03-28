@@ -10,15 +10,16 @@ public class Matches {
         int count = 11;
         while (count > 0) {
             String player = turn ? "Первый игрок" : "Второй игрок";
-            System.out.print(player + ", осталось " + count + " камней. Введите число от 1 до 3: ");
+            System.out.print(player + ", введите число от 1 до " + Math.min(count, 3) + ": ");
             int matches = Integer.parseInt(input.nextLine());
-            if (matches < 1 || matches > 3 || matches > count) {
+            if (matches < 1 || matches > Math.min(count, 3)) {
                 System.out.println("Неправильный ввод.\n"
-                        + "Число должно быть в диапазоне от 1 до 3 и не превышать остаток.");
+                        + "Число должно быть в диапазоне от 1 до " + Math.min(count, 3));
+            } else {
+                turn = !turn;
+                count -= matches;
+                System.out.println("Осталось " + count + " спичек.");
             }
-            turn = !turn;
-            count -= matches;
-
         }
         if (!turn) {
             System.out.println("Выиграл первый игрок");
