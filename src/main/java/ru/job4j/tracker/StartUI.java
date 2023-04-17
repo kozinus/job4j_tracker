@@ -12,7 +12,7 @@ public class StartUI {
         while (run) {
             showMenu(actions);
             int select = input.askInt("Select: ");
-            if (select < 0 || select >= actions.length) {
+            if (select < 0 || select > actions.length) {
                 out.println("Wrong input, you can select: 0 .. " + (actions.length - 1));
                 continue;
             }
@@ -22,7 +22,7 @@ public class StartUI {
     }
 
     private void showMenu(UserAction[] actions) {
-        out.println("Menu:");
+        out.println("Menu.");
         for (int i = 0; i < actions.length; i++) {
             out.println(i + ". " + actions[i].name());
         }
