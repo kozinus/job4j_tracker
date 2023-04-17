@@ -68,15 +68,14 @@ class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString()).isEqualTo(
-                "Menu:" + ln
+                "Menu." + ln
                         + "0. Edit item" + ln
-                        + "1. Exit Program" + ln
+                        + "1. Exit" + ln
                         + "=== Edit item ===" + ln
                         + "Заявка изменена успешно." + ln
-                        + "Menu:" + ln
+                        + "Menu." + ln
                         + "0. Edit item" + ln
-                        + "1. Exit Program" + ln
-                        + "=== Exit Program ===" + ln
+                        + "1. Exit" + ln
         );
     }
 
@@ -95,15 +94,14 @@ class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString()).isEqualTo(
-                "Menu:" + ln
+                "Menu." + ln
                         + "0. Show all items" + ln
-                        + "1. Exit Program" + ln
+                        + "1. Exit" + ln
                         + "=== Show all items ===" + ln
                         + one + ln
-                        + "Menu:" + ln
+                        + "Menu." + ln
                         + "0. Show all items" + ln
-                        + "1. Exit Program" + ln
-                        + "=== Exit Program ===" + ln
+                        + "1. Exit" + ln
         );
     }
 
@@ -123,15 +121,14 @@ class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString()).isEqualTo(
-                "Menu:" + ln
+                "Menu." + ln
                         + "0. Find by name" + ln
-                        + "1. Exit Program" + ln
+                        + "1. Exit" + ln
                         + "=== Find item by name ===" + ln
                         + one + ln
-                        + "Menu:" + ln
+                        + "Menu." + ln
                         + "0. Find by name" + ln
-                        + "1. Exit Program" + ln
-                        + "=== Exit Program ===" + ln
+                        + "1. Exit" + ln
         );
     }
 
@@ -151,15 +148,14 @@ class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
         assertThat(out.toString()).isEqualTo(
-                "Menu:" + ln
+                "Menu." + ln
                         + "0. Find by ID" + ln
-                        + "1. Exit Program" + ln
+                        + "1. Exit" + ln
                         + "=== Find item by id ===" + ln
                         + one + ln
-                        + "Menu:" + ln
+                        + "Menu." + ln
                         + "0. Find by ID" + ln
-                        + "1. Exit Program" + ln
-                        + "=== Exit Program ===" + ln
+                        + "1. Exit" + ln
         );
     }
 
