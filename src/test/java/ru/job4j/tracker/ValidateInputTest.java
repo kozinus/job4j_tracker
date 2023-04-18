@@ -31,11 +31,14 @@ public class ValidateInputTest {
     public void whenMultipleValidInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"1", "1", "1"}
+                new String[] {"4", "1", "3"}
         );
-        ValidateInput input = new ValidateInput(out, in);
-        int selected = input.askInt("Enter menu:");
-        assertThat(selected).isEqualTo(1);
+        int selected = 0;
+        for (int index = 0; index < 3; index++) {
+            ValidateInput input = new ValidateInput(out, in);
+            selected = input.askInt("Enter menu:");
+        }
+        assertThat(selected).isEqualTo(3);
     }
 
     @Test
