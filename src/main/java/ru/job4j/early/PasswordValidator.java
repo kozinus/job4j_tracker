@@ -29,23 +29,21 @@ public class PasswordValidator {
         boolean hasDigit = false;
         boolean hasSpecial = false;
         for (char symbol : password.toCharArray()) {
-            if (!hasUpCase) {
-                hasUpCase = Character.isUpperCase(symbol);
-                continue;
+            if (hasUpCase && hasLowCase && hasDigit && hasSpecial) {
+                break;
             }
-            if (!hasLowCase) {
-                hasLowCase = Character.isLowerCase(symbol);
-                continue;
+            if (Character.isUpperCase(symbol)) {
+                hasUpCase = true;
             }
-            if (!hasDigit) {
-                hasDigit = Character.isDigit(symbol);
-                continue;
+            if (Character.isLowerCase(symbol)) {
+                hasLowCase = true;
             }
-            if (!hasSpecial) {
-                hasSpecial = !Character.isLetterOrDigit(symbol);
-                continue;
+            if (Character.isDigit(symbol)) {
+                hasDigit = true;
             }
-            break;
+            if (Character.isLetterOrDigit(symbol)) {
+                hasSpecial = true;
+            }
         }
         if (!hasUpCase) {
             throw new IllegalArgumentException(
