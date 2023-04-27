@@ -17,10 +17,7 @@ public class AppleStore {
         for (int index = 0; index < count; index++) {
             customer = queue.poll();
         }
-        if (customer == null) {
-            return null;
-        }
-        return customer.name();
+        return customer == null ? null : customer.name();
     }
 
     public String getFirstUpsetCustomer() {
