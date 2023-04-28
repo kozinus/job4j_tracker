@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
 
-public class Item {
+public class Item implements Comparable<Item> {
     private final LocalDateTime created = LocalDateTime.now();
 
     private static final DateTimeFormatter FORMATTER
@@ -32,6 +32,11 @@ public class Item {
                 + ", name='" + name + '\''
                 + ", created=" + created.format(FORMATTER) + '\''
                 + '}';
+    }
+
+    @Override
+    public int compareTo(Item another) {
+        return this.name.compareTo(another.name);
     }
 
     public LocalDateTime getCreated() {
