@@ -69,21 +69,14 @@ public class AnalyzeByMap {
         List<Label> labelSubjects = new ArrayList<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                if (!listOfSubjects.containsKey(subject.name())) {
-                    listOfSubjects.put(subject.name(), 0);
-                }
+                listOfSubjects.putIfAbsent(subject.name(), 0);
                 listOfSubjects.put(subject.name(), listOfSubjects.get(subject.name()) + subject.score());
             }
         }
         for (String name : listOfSubjects.keySet()) {
             labelSubjects.add(new Label(name, listOfSubjects.get(name)));
         }
-        Label bestSubject = labelSubjects.get(0);
-        for (Label subject : labelSubjects) {
-            if (subject.compareTo(bestSubject) > 0) {
-                bestSubject = subject;
-            }
-        }
-        return bestSubject;
+        Collections.sort(labelSubjects);
+        return labelSubjects.get(labelSubjects.size() - 1);
     }
 }
