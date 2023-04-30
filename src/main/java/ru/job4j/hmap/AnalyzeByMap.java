@@ -69,8 +69,8 @@ public class AnalyzeByMap {
         List<Label> labelSubjects = new ArrayList<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
-                listOfSubjects.putIfAbsent(subject.name(), 0);
-                listOfSubjects.put(subject.name(), listOfSubjects.get(subject.name()) + subject.score());
+                listOfSubjects.put(subject.name(),
+                        listOfSubjects.getOrDefault(subject.name(), 0) + subject.score());
             }
         }
         for (String name : listOfSubjects.keySet()) {
