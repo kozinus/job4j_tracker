@@ -10,9 +10,11 @@ public class LexSort implements Comparator<String> {
     public int compare(String left, String right) {
         int rsl;
         List<String> leftNumerals =
-                Arrays.stream((left.split(" "))[0].split("\\.")).toList();
+                Arrays.stream((left.split("\\."))[0].split("\\.")).toList();
         List<String> rightNumerals =
-                Arrays.stream((right.split(" "))[0].split("\\.")).toList();
+                Arrays.stream(right.split("\\.")[0].split("\\.")).toList();
+        System.out.println(leftNumerals);
+        System.out.println(rightNumerals);
         for (int i = 0;
              i < Integer.min(rightNumerals.size(), leftNumerals.size());
              i++) {
