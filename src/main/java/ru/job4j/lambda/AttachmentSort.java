@@ -11,19 +11,9 @@ public class AttachmentSort {
                 new Attachment("image 1", 34),
                 new Attachment("image 3", 13)
         );
-        Comparator<Attachment> comparatorBySize = new Comparator<>() {
-            @Override
-            public int compare(Attachment o1, Attachment o2) {
-                return Integer.compare(o1.getSize(), o2.getSize());
-            }
-        };
-        Comparator<Attachment> comparatorByName = new Comparator<>() {
-            @Override
-            public int compare(Attachment o1, Attachment o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        };
-        attachments.sort(comparatorByName.thenComparing(comparatorBySize));
+        Comparator<Attachment> comparatorBySize = (o1, o2) -> Integer.compare(o1.getSize(), o2.getSize());
+        Comparator<String> cmpText = (left, right) -> left.compareTo(right);
+        Comparator<String> cmpDescSize = (left, right) -> Integer.compare(left.length(), right.length());
         System.out.println(attachments);
     }
 }
