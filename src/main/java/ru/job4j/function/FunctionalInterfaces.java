@@ -26,9 +26,7 @@ public class FunctionalInterfaces {
             }
         }
 
-        Supplier<List<String>> sup = () -> {
-            return new ArrayList<>(map.values());
-        };
+        Supplier<List<String>> sup = () -> new ArrayList<>(map.values());
         List<String> strings = sup.get();
 
         Consumer<String> con = (s) -> System.out.println(s);
