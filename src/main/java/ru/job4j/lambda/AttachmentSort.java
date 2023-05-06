@@ -9,11 +9,11 @@ public class AttachmentSort {
         List<Attachment> attachments = Arrays.asList(
                 new Attachment("image 2", 100),
                 new Attachment("image 1", 34),
-                new Attachment("image 3", 13)
+                new Attachment("image 34", 13)
         );
         Comparator<Attachment> comparatorBySize = (o1, o2) -> Integer.compare(o1.getSize(), o2.getSize());
         Comparator<String> cmpText = (left, right) -> left.compareTo(right);
-        Comparator<String> cmpDescSize = (left, right) -> Integer.compare(left.length(), right.length());
+        Comparator<String> cmpDescSize = (left, right) -> Integer.compare(right.length(), left.length());
         System.out.println(attachments);
     }
 }
