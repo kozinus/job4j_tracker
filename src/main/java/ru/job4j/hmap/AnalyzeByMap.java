@@ -58,19 +58,16 @@ public class AnalyzeByMap {
 
     public static Label bestSubject(List<Pupil> pupils) {
         Map<String, Integer> listOfSubjects = new LinkedHashMap<>();
+        List<Label> labelSubjects = new ArrayList<>();
         for (Pupil pupil : pupils) {
             for (Subject subject : pupil.subjects()) {
                 listOfSubjects.merge(subject.name(), subject.score(), Integer::sum);
             }
         }
-        int max = 0;
-        String result = "";
-        for (Map.Entry<String, Integer> entry : listOfSubjects.entrySet()) {
-            if (max < entry.getValue()) {
-                max = entry.getValue();
-                result = entry.getKey();
-            }
+        for (String name : listOfSubjects.keySet()) {
+            labelSubjects.add(new Label(name, listOfSubjects.get(name)));
         }
-        return new Label(result, listOfSubjects.get(result));
+        Collections.sort(labelSubjects);
+        return labelSubjects.get(labelSubjects.size() - 1);
     }
 }
