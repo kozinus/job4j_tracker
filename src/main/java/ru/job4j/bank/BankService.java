@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * Класс описывает работу банковских переводов
@@ -57,14 +58,11 @@ public class BankService {
      */
 
     public User findByPassport(String passport) {
-        User rsl = null;
-        for (User user : users.keySet()) {
-            if (passport.equals(user.getPassport())) {
-                rsl = user;
-                break;
-            }
-        }
-        return rsl;
+        return (users.keySet()).stream()
+                .flatMap(Stream::ofNullable)
+                .filter(user -> passport.equals(user.getPassport()))
+                .findFirst()
+                .orElse(null);
     }
     /**
      * Метод удаляет пару User - LinkedList<account> по строке passport
@@ -74,15 +72,11 @@ public class BankService {
      */
 
     public Account findByRequisite(String passport, String requisite) {
-        User pass = findByPassport(passport);
-        if (pass != null) {
-            for (Account account : users.get(pass)) {
-                if (requisite.equals(account.getRequisite())) {
-                    return account;
-                }
-            }
-        }
-        return null;
+        return findByPassport(passport) != null ? users.get(findByPassport(passport)).stream()
+                .flatMap(Stream::ofNullable)
+                .filter(account -> requisite.equals(account.getRequisite()))
+                .findFirst()
+                .orElse(null) : null;
     }
     /**
      * Метод находит счёт-отправитель и счёт-получатель.
