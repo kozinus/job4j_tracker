@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 /**
  * Класс описывает работу банковских переводов
@@ -59,7 +58,6 @@ public class BankService {
 
     public User findByPassport(String passport) {
         return (users.keySet()).stream()
-                .flatMap(Stream::ofNullable)
                 .filter(user -> passport.equals(user.getPassport()))
                 .findFirst()
                 .orElse(null);
@@ -72,11 +70,10 @@ public class BankService {
      */
 
     public Account findByRequisite(String passport, String requisite) {
-        return findByPassport(passport) != null ? users.get(findByPassport(passport)).stream()
-                .flatMap(Stream::ofNullable)
+        return users.getOrDefault(findByPassport(passport), new ArrayList<>()).stream()
                 .filter(account -> requisite.equals(account.getRequisite()))
                 .findFirst()
-                .orElse(null) : null;
+                .orElse(null);
     }
     /**
      * Метод находит счёт-отправитель и счёт-получатель.
