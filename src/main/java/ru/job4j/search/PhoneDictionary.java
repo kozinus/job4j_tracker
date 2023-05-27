@@ -12,7 +12,7 @@ public class PhoneDictionary {
     }
 
     public ArrayList<Person> find(String key) {
-        ArrayList<Person> result = new ArrayList<>();
+        var result = new ArrayList<Person>();
         Predicate<Person> containsSurname = person -> person.getSurname().contains(key);
         Predicate<Person> containsName = person -> person.getName().contains(key);
         Predicate<Person> containsAddress = person -> person.getAddress().contains(key);
