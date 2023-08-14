@@ -13,11 +13,11 @@ public class ReplaceAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store memTracker) {
         out.println("=== Edit item ===");
         int id = input.askInt("Enter id: ");
         String name = input.askStr("Enter name: ");
-        if (tracker.replace(id, new Item(name))) {
+        if (memTracker.replace(id, new Item(name))) {
             out.println("Заявка изменена успешно.");
         } else {
             out.println("Ошибка замены заявки.");
