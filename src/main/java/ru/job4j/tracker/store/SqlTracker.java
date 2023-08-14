@@ -46,7 +46,7 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        try (PreparedStatement ps = cn.prepareStatement("INSERT INTO items(name, time) VALUES(?, ?)");
+        try (PreparedStatement ps = cn.prepareStatement("INSERT INTO items(name, created) VALUES(?, ?)");
                 var statement = cn.createStatement()) {
             ps.setString(1, item.getName());
             ps.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
@@ -70,7 +70,7 @@ public class SqlTracker implements Store {
                     "SELECT * FROM %s ORDER BY ID DESC LIMIT 1", "items"
             )).next()) {
                 try (PreparedStatement ps =
-                             cn.prepareStatement("UPDATE items SET name = ?, time = ? where id = ?")) {
+                             cn.prepareStatement("UPDATE items SET name = ?, created = ? where id = ?")) {
                     ps.setString(1, item.getName());
                     ps.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
                     ps.setInt(3, id);
