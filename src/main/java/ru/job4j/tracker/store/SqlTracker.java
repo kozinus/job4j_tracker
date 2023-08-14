@@ -67,10 +67,10 @@ public class SqlTracker implements Store {
         boolean flag = false;
         try (var statement = cn.createStatement()) {
             if (statement.executeQuery(String.format(
-                    "SELECT * FROM %s ORDER BY ID DESC LIMIT 1", "users"
+                    "SELECT * FROM %s ORDER BY ID DESC LIMIT 1", "items"
             )).next()) {
                 try (PreparedStatement ps =
-                             cn.prepareStatement("UPDATE users SET name = ?, time = ? where id = ?")) {
+                             cn.prepareStatement("UPDATE items SET name = ?, time = ? where id = ?")) {
                     ps.setString(1, item.getName());
                     ps.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
                     ps.setInt(3, id);
@@ -91,10 +91,10 @@ public class SqlTracker implements Store {
         boolean flag = false;
         try (var statement = cn.createStatement()) {
             if (statement.executeQuery(String.format(
-                    "SELECT * FROM %s ORDER BY ID DESC LIMIT 1", "users"
+                    "SELECT * FROM %s ORDER BY ID DESC LIMIT 1", "items"
             )).next()) {
                 try (PreparedStatement ps =
-                             cn.prepareStatement("DELETE FROM users where id = ?")) {
+                             cn.prepareStatement("DELETE FROM items where id = ?")) {
                     ps.setInt(1, id);
                     ps.execute();
                     flag = true;
@@ -112,7 +112,7 @@ public class SqlTracker implements Store {
     public List<Item> findAll() {
         List<Item> findItems = new ArrayList<>();
         try (var statement = cn.createStatement()) {
-            var resSet = statement.executeQuery("SELECT * FROM users");
+            var resSet = statement.executeQuery("SELECT * FROM items");
             while (resSet.next()) {
                 findItems.add(new Item(resSet.getInt(1),
                         resSet.getString(2),
@@ -128,7 +128,7 @@ public class SqlTracker implements Store {
     public List<Item> findByName(String key) {
         List<Item> findItems = new ArrayList<>();
         try (var statement = cn.createStatement()) {
-            var resSet = statement.executeQuery(String.format("SELECT * FROM users where name = '%s'", key));
+            var resSet = statement.executeQuery(String.format("SELECT * FROM items where name = '%s'", key));
             while (resSet.next()) {
                 findItems.add(new Item(resSet.getInt(1),
                         resSet.getString(2),
@@ -144,7 +144,7 @@ public class SqlTracker implements Store {
     public Item findById(int id) {
         Item output = null;
         try (var statement = cn.createStatement()) {
-            var resSet = statement.executeQuery(String.format("SELECT * FROM users where id = %d LIMIT 1", id));
+            var resSet = statement.executeQuery(String.format("SELECT * FROM items where id = %d LIMIT 1", id));
             if (resSet.next()) {
                 output = new Item(resSet.getInt(1),
                         resSet.getString(2),
