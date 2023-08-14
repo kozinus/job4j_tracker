@@ -46,13 +46,13 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        try (PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name, time) VALUES(?, ?)");
+        try (PreparedStatement ps = cn.prepareStatement("INSERT INTO items(name, time) VALUES(?, ?)");
                 var statement = cn.createStatement()) {
             ps.setString(1, item.getName());
             ps.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
             ps.execute();
             var resSet = statement.executeQuery(String.format(
-                    "SELECT * FROM %s ORDER BY ID DESC LIMIT 1", "users"
+                    "SELECT * FROM %s ORDER BY ID DESC LIMIT 1", "items"
             ));
             resSet.next();
             item.setId(resSet.getInt("id"));
