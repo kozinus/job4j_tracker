@@ -71,15 +71,14 @@ public class Item implements Comparable<Item> {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!(o instanceof Item item)) {
             return false;
         }
-        Item item = (Item) o;
-        return id == item.id && Objects.equals(this.created, ((Item) o).created) && Objects.equals(this.name, ((Item) o).name);
+        return getId() == item.getId() && getCreated().equals(item.getCreated()) && getName().equals(item.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(created, id, name);
+        return Objects.hash(getCreated(), getId(), getName());
     }
 }

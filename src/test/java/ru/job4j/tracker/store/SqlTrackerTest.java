@@ -31,9 +31,6 @@ public class SqlTrackerTest {
                     config.getProperty("password")
 
             );
-            Statement statement = connection.createStatement();
-            String sql = "create table items(id serial primary key, name text, created timestamp);";
-            statement.execute(sql);
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
@@ -41,9 +38,6 @@ public class SqlTrackerTest {
 
     @AfterAll
     public static void closeConnection() throws SQLException {
-        Statement statement = connection.createStatement();
-        String sql = "drop table items;";
-        statement.execute(sql);
         connection.close();
     }
 
