@@ -9,7 +9,6 @@ import ru.job4j.tracker.Item;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -54,5 +53,40 @@ public class SqlTrackerTest {
         Item item = new Item("item");
         tracker.add(item);
         assertThat(tracker.findById(item.getId())).isEqualTo(item);
+    }
+
+    @Test
+    public void whenSaveItemAndDeleteItMustBeTrue() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        tracker.add(item);
+        assertThat(tracker.delete(item.getId())).isTrue();
+    }
+
+    @Test
+    public void whenSaveItemAndReplaceItWithAnotherItemMustBeTrue() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        Item newItem = new Item("Replacement");
+        tracker.add(item);
+        assertThat(tracker.replace(item.getId(), newItem)).isTrue();
+    }
+
+    @Test
+    public void whenSaveItemAndFindByNameLastMustBeTheSame() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        tracker.add(item);
+        List<Item> finded = tracker.findByName("item");
+        assertThat(finded.get(finded.size() - 1)).isEqualTo(item);
+    }
+
+    @Test
+    public void whenSaveItemAndFindAllThenLastMustBeTheSame() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        tracker.add(item);
+        List<Item> finded = tracker.findAll();
+        assertThat(finded.get(finded.size() - 1)).isEqualTo(item);
     }
 }
