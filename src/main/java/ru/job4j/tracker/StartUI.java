@@ -2,7 +2,6 @@ package ru.job4j.tracker;
 
 import ru.job4j.tracker.store.SqlTracker;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class StartUI {
@@ -15,6 +14,7 @@ public class StartUI {
     public void init(Input input, Store memTracker, List<UserAction> actions) {
         boolean run = true;
         while (run) {
+            System.gc();
             showMenu(actions);
             int select = input.askInt("Select: ");
             if (select < 0 || select > actions.size()) {
@@ -41,8 +41,10 @@ public class StartUI {
         try (Store tracker = new SqlTracker()) {
             List<UserAction> actions = List.of(
                     new CreateAction(output),
+                    new CreateManyItems(output),
                     new ReplaceAction(output),
                     new DeleteAction(output),
+                    new DeleteAllItems(output),
                     new ShowAction(output),
                     new FindByIDAction(output),
                     new FindByNameAction(output),
