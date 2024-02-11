@@ -1,24 +1,27 @@
 package ru.job4j.tracker;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
+@Data
 public class Item implements Comparable<Item> {
-    private LocalDateTime created = LocalDateTime.now().withNano(0);
+    private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
 
     private static final DateTimeFormatter FORMATTER
             = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
     private int id;
     private String name;
 
-    public Item() {
-
-    }
-
     public Item(String name) {
         this.name = name;
+    }
+
+    public Item() {
     }
 
     public Item(int id, String name) {
@@ -27,9 +30,9 @@ public class Item implements Comparable<Item> {
     }
 
     public Item(int id, String name, LocalDateTime created) {
+        this.created = created;
         this.id = id;
         this.name = name;
-        this.created = created;
     }
 
     @Override
@@ -44,26 +47,6 @@ public class Item implements Comparable<Item> {
     @Override
     public int compareTo(Item another) {
         return this.name.compareTo(another.name);
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
