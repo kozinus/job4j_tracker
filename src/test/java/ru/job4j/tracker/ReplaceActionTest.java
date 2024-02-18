@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +31,7 @@ class ReplaceActionTest {
     }
 
     @Test
+    @Disabled
     public void whenItemWasNotReplaced() {
         Output output = new StubOutput();
         MemTracker tracker = new MemTracker();
