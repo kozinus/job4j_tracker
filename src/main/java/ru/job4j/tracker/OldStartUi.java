@@ -9,7 +9,7 @@ public class OldStartUi {
         String currentDateFormat = item.getCreated().format(formatter);
         System.out.println("Текущие дата и время после форматирования: " + currentDateFormat);
 
-        Item itemSecond = new Item(5, "named");
+        Item itemSecond = new Item("named");
         System.out.println(itemSecond);
     }
 }
