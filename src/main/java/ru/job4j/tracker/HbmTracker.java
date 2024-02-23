@@ -22,9 +22,10 @@ public class HbmTracker implements Store, AutoCloseable {
             session.beginTransaction();
             session.save(item);
             session.getTransaction().commit();
-            session.close();
         } catch (Exception e) {
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return item;
     }
@@ -32,15 +33,16 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public boolean replace(int id, Item item) {
         Session session = sf.openSession();
-        boolean flag = true;
+        boolean flag = false;
         try {
             session.beginTransaction();
             session.update(item);
             session.getTransaction().commit();
-            session.close();
+            flag = true;
         } catch (Exception e) {
-            flag = false;
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return flag;
     }
@@ -48,18 +50,18 @@ public class HbmTracker implements Store, AutoCloseable {
     @Override
     public boolean delete(int id) {
         Session session = sf.openSession();
-        boolean flag = true;
+        boolean flag = false;
         try {
             session.beginTransaction();
             Item user = new Item();
             user.setId(id);
-            session.createQuery("delete Item where id = :Id", Item.class)
-                    .setParameter("Id", id);
+            flag = session.createQuery("delete Item where id = :Id", Item.class)
+                    .setParameter("Id", id).executeUpdate() > 0;
             session.getTransaction().commit();
-            session.close();
         } catch (Exception e) {
-            flag = false;
             session.getTransaction().rollback();
+        } finally {
+        session.close();
         }
         return flag;
     }
@@ -73,9 +75,10 @@ public class HbmTracker implements Store, AutoCloseable {
             result = session.createQuery(
                     "from Item as p order by p.id asc", Item.class).list();
             session.getTransaction().commit();
-            session.close();
         } catch (Exception e) {
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return result;
     }
@@ -91,9 +94,10 @@ public class HbmTracker implements Store, AutoCloseable {
                     .setParameter(1, "%" + key + "%")
                     .list();
             session.getTransaction().commit();
-            session.close();
         } catch (Exception e) {
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return result;
     }
@@ -109,9 +113,10 @@ public class HbmTracker implements Store, AutoCloseable {
                     .setParameter("Id", id)
                     .getSingleResult();
             session.getTransaction().commit();
-            session.close();
         } catch (Exception e) {
             session.getTransaction().rollback();
+        } finally {
+            session.close();
         }
         return result;
     }
