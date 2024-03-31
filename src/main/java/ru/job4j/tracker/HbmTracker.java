@@ -55,7 +55,7 @@ public class HbmTracker implements Store, AutoCloseable {
             session.beginTransaction();
             Item user = new Item();
             user.setId(id);
-            flag = session.createQuery("delete Item where id = :Id", Item.class)
+            flag = session.createQuery("delete Items where id = :Id", Item.class)
                     .setParameter("Id", id).executeUpdate() > 0;
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class HbmTracker implements Store, AutoCloseable {
         try {
             session.beginTransaction();
             result = session.createQuery(
-                    "from Item as p order by p.id asc", Item.class).list();
+                    "from Items as p order by p.id asc", Item.class).list();
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
@@ -90,7 +90,7 @@ public class HbmTracker implements Store, AutoCloseable {
         try {
             session.beginTransaction();
             result = session.createQuery(
-                            "from Item as p where p.login like ?1", Item.class)
+                            "from Items as p where p.login like ?1", Item.class)
                     .setParameter(1, "%" + key + "%")
                     .list();
             session.getTransaction().commit();
@@ -109,7 +109,7 @@ public class HbmTracker implements Store, AutoCloseable {
         try {
             session.beginTransaction();
             result = session.createQuery(
-                            "from ru.job4j.cars.model.User as p where p.id = :Id", Item.class)
+                            "from Items as p where p.id = :Id", Item.class)
                     .setParameter("Id", id)
                     .getSingleResult();
             session.getTransaction().commit();
@@ -119,6 +119,22 @@ public class HbmTracker implements Store, AutoCloseable {
             session.close();
         }
         return result;
+    }
+
+    public void wipeTable() {
+        Session session = sf.openSession();
+        Item result = null;
+        try {
+            session.beginTransaction();
+            session.createQuery(
+                            "delete from Items", Item.class)
+                    .executeUpdate();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
     }
 
     @Override

@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Disabled
 class ItemTest {
+    @Disabled
     @Test
     public void whenAscSort() {
         List<Item> items = Arrays.asList(

@@ -114,9 +114,11 @@ public class SqlTracker implements Store {
         try (var statement = cn.createStatement()) {
             var resSet = statement.executeQuery("SELECT * FROM items");
             while (resSet.next()) {
-                findItems.add(new Item(resSet.getInt(1),
-                        resSet.getString(2),
-                        resSet.getTimestamp(3).toLocalDateTime()));
+                Item item = new Item();
+                item.setId(resSet.getInt(1));
+                item.setName(resSet.getString(2));
+                item.setCreated(resSet.getTimestamp(3).toLocalDateTime());
+                findItems.add(item);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -130,9 +132,11 @@ public class SqlTracker implements Store {
         try (var statement = cn.createStatement()) {
             var resSet = statement.executeQuery(String.format("SELECT * FROM items where name = '%s'", key));
             while (resSet.next()) {
-                findItems.add(new Item(resSet.getInt(1),
-                        resSet.getString(2),
-                        resSet.getTimestamp(3).toLocalDateTime()));
+                Item item = new Item();
+                item.setId(resSet.getInt(1));
+                item.setName(resSet.getString(2));
+                item.setCreated(resSet.getTimestamp(3).toLocalDateTime());
+                findItems.add(item);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -146,9 +150,11 @@ public class SqlTracker implements Store {
         try (var statement = cn.createStatement()) {
             var resSet = statement.executeQuery(String.format("SELECT * FROM items where id = %d LIMIT 1", id));
             if (resSet.next()) {
-                output = new Item(resSet.getInt(1),
-                        resSet.getString(2),
-                        resSet.getTimestamp(3).toLocalDateTime());
+                Item item = new Item();
+                item.setId(resSet.getInt(1));
+                item.setName(resSet.getString(2));
+                item.setCreated(resSet.getTimestamp(3).toLocalDateTime());
+                output = item;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
