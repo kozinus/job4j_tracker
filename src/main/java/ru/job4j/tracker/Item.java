@@ -4,14 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
-import ru.job4j.toone.User;
-
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.ArrayList;
 
 @Entity
-@Table(name = "items")
+@Table(name = "item")
 @RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,15 +21,7 @@ public class Item implements Comparable<Item> {
     @NonNull
     private String name;
 
-    private LocalDateTime created = LocalDateTime.now();
-
-    @ManyToMany
-    @JoinTable(
-            name = "participates",
-            joinColumns = { @JoinColumn(name = "item_id") },
-            inverseJoinColumns = { @JoinColumn(name = "user_id") }
-    )
-    private List<User> participates = new ArrayList<>();
+    private LocalDateTime created = LocalDateTime.now().withSecond(0).withNano(0);
 
     @Override
     public int compareTo(Item item) {

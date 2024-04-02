@@ -14,8 +14,5 @@
         <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
 
         <mapping class="ru.job4j.tracker.Item" />
-        <mapping class="ru.job4j.toone.UserMessenger" />
-        <mapping class="ru.job4j.toone.Role" />
-        <mapping class="ru.job4j.toone.User" />
     </session-factory>
 </hibernate-configuration>
