@@ -1,4 +1,4 @@
-create table item (
+create table items (
    id serial primary key,
    name text,
    created timestamp default now()
