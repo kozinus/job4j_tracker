@@ -71,7 +71,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>1.18.32</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -95,7 +95,7 @@
             <plugin>
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
-                <version>4.15.0</version>
+                <version>4.17.0</version>
                 <configuration>
                     <propertyFile>${liquibase.config}</propertyFile>
                 </configuration>
