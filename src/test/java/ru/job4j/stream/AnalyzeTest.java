@@ -3,6 +3,8 @@ package ru.job4j.stream;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Stream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 
@@ -163,5 +165,21 @@ class AnalyzeByMapTest {
                 ).stream()
         );
         assertThat(best).isEqualTo(new Tuple("Math", 250D));
+    }
+
+    @Test
+    public void whenBestSubjectIsEmpty() {
+        Tuple best = Analyze.bestSubject(
+                Stream.empty()
+        );
+        assertThat(best).isEqualTo(new Tuple("", 0D));
+    }
+
+    @Test
+    public void whenBestPupilIsEmpty() {
+        Tuple best = Analyze.bestStudent(
+                Stream.empty()
+        );
+        assertThat(best).isEqualTo(new Tuple("", 0D));
     }
 }
