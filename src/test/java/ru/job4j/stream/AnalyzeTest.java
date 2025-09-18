@@ -172,7 +172,7 @@ class AnalyzeByMapTest {
         Tuple best = Analyze.bestSubject(
                 Stream.empty()
         );
-        assertThat(best).isEqualTo(new Tuple("", 0D));
+        assertThat(best).isNull();
     }
 
     @Test
@@ -180,6 +180,6 @@ class AnalyzeByMapTest {
         Tuple best = Analyze.bestStudent(
                 Stream.empty()
         );
-        assertThat(best).isEqualTo(new Tuple("", 0D));
+        assertThat(best).isNull();
     }
 }
